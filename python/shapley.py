@@ -384,10 +384,9 @@ class ShapleyEstimator(BaseEstimator):
             # Reset snapshot of current shapley values
             shapley_values_prev = self._shapley_values.copy()
 
-            # Log current sum of absolute shapley values (for testing)
+            # Log convergence metric for this iteration
             if (i + 1) % max(10**np.int(np.log10(i + 1) - 1), 1) == 0:
-                # Log convergence metric for this iteration
-                self._convergence_history[i] = conv
+                self._convergence_history[i + 1] = conv
 
             # Print convergence (intervals increase logarithmically)
             mean_conv = np.mean(conv)
@@ -400,8 +399,8 @@ class ShapleyEstimator(BaseEstimator):
                            len(self._already_seen) * 100 /
                            (num_coalitions - 1)))
 
-                # Log current shapley values (for testing)
-                self._shapley_history[i] = self._shapley_values.copy()
+                # Log current shapley values
+                self._shapley_history[i + 1] = self._shapley_values.copy()
 
             # Early stopping if convergence measure is under the threshold 'tol'
             # for 'tol_counter_threshold' iterations
@@ -412,9 +411,16 @@ class ShapleyEstimator(BaseEstimator):
 
             if tol_counter >= self.tol_counter_threshold:
                 print("Early stopping at iteration {}".format(i + 1))
-                self._convergence_history[i] = conv
-                self._shapley_history[i] = self._shapley_values.copy()
+                self._convergence_history[i + 1] = conv
+                self._shapley_history[i + 1] = self._shapley_values.copy()
                 break
+
+        # Log Shapley values if last iteration reached (and hasn't been logged
+        # already)
+        if ((i + 1) % 10**np.int(np.log10(i + 1)) != 0) & \
+            tol_counter < self.tol_counter_threshold:
+            self._convergence_history[i + 1] = conv
+            self._shapley_history[i + 1] = self._shapley_values.copy()
 
         print("Finished")
         print(("Iteration: {:6d}, Difference: {:f}, Time: {}, " + \
