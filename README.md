@@ -3,6 +3,7 @@
 Python scripts for regression models, using the Scikit-Learn framework:
 * Diagnostic plots
 * Approximate Shapley values
+* Bootstrapped error margins for predictions
 
 ## Diagnostic plots
 While ML models do not generally have the same residual distribution assumptions as for classical linear regression, there is still value in examining residual plots.
