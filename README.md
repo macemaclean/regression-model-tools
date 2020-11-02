@@ -2,7 +2,7 @@
 
 Python scripts for regression models, using the Scikit-Learn framework:
 * Diagnostic plots
-* Bootstrapped error intervals for predictions
+* Bootstrapped confidence intervals for predictions
 * Approximate Shapley values
 
 ## Diagnostic plots
@@ -53,7 +53,7 @@ diagnostics.qq_plot()
 ```
 ![Residuals against fitted values](https://github.com/macemaclean/regression-model-tools/blob/master/docs/images/diagnostics_qq_plot.png)
 
-## Bootstrapped error intervals for predictions
-A script to generate local bootstrapped confidence intervals for prediction errors using observed residuals for *k* nearest neighbours in a reference data set. Increasing the value of *k* obtains results closer to a global error interval.
+## Bootstrapped confidence intervals for predictions
+A script to generate local bootstrapped confidence intervals for predictions using observed residuals for *k* nearest neighbours in a reference data set. Increasing the value of *k* obtains results closer to a global error interval.
 
 ![Residuals against fitted values](https://github.com/macemaclean/regression-model-tools/blob/master/docs/images/bootstrapped_error_intervals_k_comparison.png)
