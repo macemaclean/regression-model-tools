@@ -2,8 +2,8 @@
 
 Python scripts for regression models, using the Scikit-Learn framework:
 * Diagnostic plots
+* Bootstrapped confidence intervals for predictions
 * Approximate Shapley values
-* Bootstrapped error margins for predictions
 
 ## Diagnostic plots
 While ML models do not generally have the same residual distribution assumptions as for classical linear regression, there is still value in examining residual plots.
@@ -52,3 +52,8 @@ diagnostics.hist_residuals()
 diagnostics.qq_plot()
 ```
 ![Residuals against fitted values](https://github.com/macemaclean/regression-model-tools/blob/master/docs/images/diagnostics_qq_plot.png)
+
+## Bootstrapped confidence intervals for predictions
+A script to generate local bootstrapped confidence intervals for predictions using observed residuals for *k* nearest neighbours in a reference data set. Increasing the value of *k* obtains results closer to a global error interval.
+
+![Residuals against fitted values](https://github.com/macemaclean/regression-model-tools/blob/master/docs/images/bootstrapped_error_intervals_k_comparison.png)
